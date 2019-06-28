@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="./script.js"></script>
+
+
+  <style>
+    .shipments {
+      text-align: right;
+      background-image: url('./images/shipments.png');
+      border: 1px solid #aaa;
+      padding: 5px;
+      padding-left: 20px;
+      background-size: 15px 20px;
+      background-repeat: no-repeat;
+      background-position: 8px 6px;
+    }
+    .duration {
+      text-align: right;
+      background-image: url('./images/day.png');
+      border: 1px solid #aaa;
+      padding: 5px;
+      padding-left: 20px;
+      background-size: 15px 20px;
+      background-repeat: no-repeat;
+      background-position: 8px 6px;
+    }
+    .rupee {
+      text-align: right;
+      background-image: url('./images/rupee.png');
+      border: 1px solid #aaa;
+      padding: 5px;
+      padding-left: 20px;
+      background-size: 15px 20px;
+      background-repeat: no-repeat;
+      background-position: 8px 6px;
+    }
+    .percent {
+      text-align: right;
+      background-image: url('./images/percentage.png');
+      border: 1px solid #aaa;
+      padding: 5px;
+      padding-left: 20px;
+      background-size: 15px 20px;
+      background-repeat: no-repeat;
+      background-position: 8px 6px;
+    }
+    .description
+    {
+      background: #ececec;
+      border-radius: 5px;
+      border: 1px solid #a7a7a7;
+      border-radius: 0px 8px 8px 8px;
+      color: #888;
+      padding: 10px;
+      margin: 5px 15px 0px 15px;
+    }
+
+    .savings-label
+    {
+      text-align: right;
+      font-size: 20px;
+    }
+    .savings-value
+    {
+      text-align: right;
+      padding-right: 30px;
+      font-size: 20px;
+    }
+    
+
+    .container
+    {
+      background: #dddddd11;
+      border-radius: 15px;
+      margin: 20px auto;
+      padding: 20px;
+      box-shadow: 0px 0px 5px;
+      -webkit-transition: visibility 0s, opacity 0.5s linear;
+      transition: visibility 0s, opacity 0.5s linear; 
+    }
+
+    .visible-container
+    {
+      visibility: visible;
+      opacity: 1;
+    }
+    .hidden-container
+    {
+      display: none;
+    }
+
+    .error-msg
+    {
+      color: red;
+      border: 1px solid #800f;
+      border-radius: 5px;
+      padding: 5px;
+      display: none;
+    }
+
+
+
+  </style>
+</head>
+<body>
+
+<div class="container" id="page1">
+  <h3 class="text-center">Enter your details</h3>
+  <div class="col-sm-12"><hr></div>
+  <form class="form-horizontal" id="company_details_form">
+    <div class="form-group">
+          <div class="col-xs-12">
+                  <label for="email">Name</label>
+          </div>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="f_name" placeholder="First Name" name="fname" >
+          </div>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="l_name" placeholder="Last Name" name="lname" >
+          </div>
+          
+    </div>
+    <div class="form-group">
+        <div class="col-xs-12">
+                <label for="email">Office email ID</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" >
+        </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-12">
+              <label for="email">Company Name</label>
+              <input type="text" class="form-control" id="c_name" placeholder="Company Name" name="cname" > 
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-12">
+              <label for="email">Number of shipments/consignments per annum in your cold chain</label>
+              <input type="number" class="form-control" id="c_count" placeholder="Number of Consignments" name="shipments" >
+      </div>
+    </div>
+  </form>
+  <button class="btn btn-default" onclick="processCompanyInfo()">Submit</button>
+</div>
+
+
+<div class="container hidden-container" id="page2">
+    <h3 class="col-sm-12 text-center">Tell us a bit about your cold chain operation</h3>
+    <div class="col-sm-12"><hr></div>
+  <form class="form-horizontal">
+    <div class="form-group">
+        <label class="control-label col-sm-5">Number of shipments/consignments per annum :</label>
+        <div class="col-sm-2">          
+          <input type="number" class="form-control shipments" id="cpa" disabled="disabled" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-5">Average value per shipment :</label>
+        <div class="col-sm-2">          
+          <input type="number" class="form-control rupee" id="vps" required>
+        </div>
+        <div class="col-sm-4 description">          
+          As declared on your insurance paperwork
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-5">Average shipping or freight cost per shipment :</label>
+        <div class="col-sm-2">          
+          <input type="number" class="form-control rupee" id="cps" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-5">Average shipment duration in days</label>
+        <div class="col-sm-2">          
+          <input type="number" class="form-control duration" id="spd" required>
+        </div>
+        <div class="col-sm-4 description">          
+          Could be as less as 1 day for air shipments or 60 days for a ocean shipment. 
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-5">Enter the percentage of insurance co-pay in case of a claim :</label>
+        <div class="col-sm-2">          
+          <input type="number" class="form-control percent" id="co_pay" required>
+        </div>
+        <div class="col-sm-4 description">          
+          The % that you will have to pay out-of-pocket in the case of an insurance claim per shipment. Typically 10%, 20%, or more.
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-5">Number of shipments out of the total that arrive damaged in a year :</label>
+        <div class="col-sm-2">          
+          <input type="number" class="form-control shipments" id="damaged_shipment" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-5">Borowing rate of interest for your working capital in your business :</label>
+        <div class="col-sm-2">          
+          <input type="number" class="form-control percent" id="borrow_roi" required>
+        </div>
+        <div class="col-sm-4 description">          
+          (Example: 6% interest)
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-5">Percentage of shipments detained beyond normal limits :</label>
+        <div class="col-sm-2">          
+          <input type="number" class="form-control percent" id="shp_dtnd" required>
+        </div>
+        <div class="col-sm-4 description">          
+          Example: 5% of shipments are detained longer than usual at the destination, ports, etc.
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-5">Number of days that these shipments were detained for on an average :</label>
+        <div class="col-sm-2">          
+          <input type="number" class="form-control duration" id="avg_dtnd" required>
+        </div>
+        <div class="col-sm-4 description">          
+          If 120 shipments in a year faced detention for 2 days each, then 2 is the average. 
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-5" for="pwd">The "per-day" detention or demurrage cost per day billed by your transporter :</label>
+        <div class="col-sm-2">          
+          <input type="number" class="form-control rupee" id="dtmnt_per_day" required>
+        </div>
+        <div class="col-sm-4 description">          
+          Example: 1 day of detention could cost $25 per shipment
+        </div>
+    </div>  
+  </form>
+  <div class="form-group">
+      <div class="control-label col-sm-2">
+          <button class="btn btn-default" onclick="processOperationData()">Submit</button> 
+      </div>
+      <div class="col-sm-8">          
+        <span class="error-msg" id="error-text"></span>
+      </div>
+  </div> 
+
+  
+
+  <hr>
+  <div id="results" class="hidden-container">
+    <h4 class="col-sm-12 text-center"><u>Savings Report</u></h4>
+    <div class="col-sm-12">
+      <label class="control-label col-sm-6 savings-label" for="pwd">Savings from Product Spoilage Prevention :</label>
+      <span id="savings_product_spoilage" class="col-sm-2 savings-value">Some data</span>
+    </div>
+    <div class="col-sm-12">
+      <label class="control-label col-sm-6 savings-label" for="pwd">Savings from Reshipping Costs :</label>
+      <span id="savings_reshipping_costs" class="col-sm-2 savings-value">Some data</span>
+    </div>
+    <div class="col-sm-12">
+      <label class="control-label col-sm-6 savings-label" for="pwd">Savings on Working Capital Interest :</label>
+      <span id="savings_cap_int" class="col-sm-2 savings-value">Some data</span>
+    </div>
+    <div class="col-sm-12">
+      <label class="control-label col-sm-6 savings-label" for="pwd">Savings in Detention Costs :</label>
+      <span id="savings_det" class="col-sm-2 savings-value">Some data</span>
+    </div>
+    <hr class="col-sm-12">
+    <div class="col-sm-12">
+      <b>
+          <label class="control-label col-sm-6 savings-label" for="pwd">Total Savings :</label>
+          <span id="savings_tot" class="col-sm-2 savings-value">Some data</span>
+      </b>
+    </div>
+    </div>
+</div>
+
+
+</body>
+</html>
